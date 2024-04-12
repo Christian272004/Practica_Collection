@@ -1,2 +1,6 @@
-package PACKAGE_NAME;public class SAPAMERCAT {
+public class SAPAMERCAT {
+    public static void main(String[] args) {
+        Menu.MenuPrincipal();
+
+    }
 }
