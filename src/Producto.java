@@ -9,6 +9,8 @@ public class Producto {
         System.out.print("Nom del producte: ");
         NomProducte = scan.nextLine();
         System.out.print("Preu: ");
+        Preu = scan.nextInt();
+
 
 
     }
