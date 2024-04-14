@@ -1,6 +1,15 @@
 import java.util.Scanner;
 
-public class Producto {
+class Producto {
+    protected String NomProducte;
+    protected int Preu;
+    protected String CodiBarras;
+
+    public Producto(String nomProducte, int preu, String codiBarras) {
+        NomProducte = nomProducte;
+        Preu = preu;
+        CodiBarras = codiBarras;
+    }
     static Scanner scan = new Scanner(System.in);
     public static void Alimentacio(){
         String NomProducte,CodiBarras,DataCaducitat;
@@ -15,6 +24,13 @@ public class Producto {
         System.out.print("Data de caducitat (dd/mm/aaaa): ");
         DataCaducitat = scan.next();
         scan.nextLine();
+
+        Producto[] productos = new Producto[3];
+        try {
+            productos[0] = new Alimentacio(NomProducte,Preu,CodiBarras,DataCaducitat);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
     }
 
