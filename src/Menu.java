@@ -1,3 +1,4 @@
+import java.net.PasswordAuthentication;
 import java.util.Scanner;
 
 public class Menu {
@@ -21,10 +22,10 @@ public class Menu {
                      MenuProucte();
                      break;
                  case 2:
-
+                     Carrito.PasarPorCaja();
                      break;
                  case 3:
-
+                     Carrito.MostrarCarritoCompra();
                      break;
                  case 0:
                      break;

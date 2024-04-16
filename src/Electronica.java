@@ -5,4 +5,17 @@ public class Electronica extends Producto{
         super(nomProducte, preu, codiBarras);
         Garantia = garantia;
     }
+
+    public int getGarantia() {
+        return Garantia;
+    }
+
+    public void setGarantia(int garantia) {
+        Garantia = garantia;
+    }
+
+    @Override
+    public String toString() {
+        return  NomProducte;
+    }
 }

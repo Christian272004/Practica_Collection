@@ -5,4 +5,17 @@ public class Textil extends Producto {
         super(nomProducte, preu, codiBarras);
         Composicio = composicio;
     }
+
+    public String getComposicio() {
+        return Composicio;
+    }
+
+    public void setComposicio(String composicio) {
+        Composicio = composicio;
+    }
+
+    @Override
+    public String toString() {
+        return NomProducte ;
+    }
 }
