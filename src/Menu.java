@@ -1,4 +1,5 @@
 import java.net.PasswordAuthentication;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Menu {
@@ -8,6 +9,8 @@ public class Menu {
 
          do {
              System.out.println("BENVINGUT AL SAPAMERCAT");
+             LocalDate DataActual = LocalDate.now();
+             System.out.println(DataActual);
              System.out.println("------------");
              System.out.println("-- INICI ---");
              System.out.println("------------");

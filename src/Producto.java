@@ -1,15 +1,45 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.DoubleStream;
 
-class Producto {
+abstract class Producto {
     protected String NomProducte;
-    protected int Preu;
+    protected float Preu;
     protected String CodiBarras;
-    protected static Producto[] productos = new Producto[100];
-    static int Contador = 0;
+    protected static ArrayList<Alimentacio> ProdAlimentacio = new ArrayList<Alimentacio>();
+    protected static ArrayList<Textil> ProdTextil = new ArrayList<Textil>();
+    protected static ArrayList<Electronica> ProdElectronica = new ArrayList<Electronica>();
 
-    public Producto(String nomProducte, int preu, String codiBarras) {
+    public Producto(String nomProducte, float preu, String codiBarras) {
         NomProducte = nomProducte;
         Preu = preu;
+        CodiBarras = codiBarras;
+    }
+
+
+
+    public String getNomProducte() {
+        return NomProducte;
+    }
+
+    public void setNomProducte(String nomProducte) {
+        NomProducte = nomProducte;
+    }
+
+    public float getPreu() {
+        return Preu;
+    }
+
+    public void setPreu(float preu) {
+        this.Preu = preu;
+    }
+
+    public String getCodiBarras() {
+        return CodiBarras;
+    }
+
+    public void setCodiBarras(String codiBarras) {
         CodiBarras = codiBarras;
     }
 
@@ -17,96 +47,53 @@ class Producto {
     static Scanner scan = new Scanner(System.in);
     public static void Alimentacio(){
         String NomProducte,CodiBarras,DataCaducitat;
-        int Preu;
+        float Preu;
         System.out.println("Afegir aliment");
         System.out.print("Nom producte: ");
         NomProducte = scan.nextLine();
         System.out.print("Preu: ");
-        Preu = scan.nextInt();
+        Preu = scan.nextFloat();
         System.out.print("Codi de barres: ");
         CodiBarras = scan.next();
         System.out.print("Data de caducitat (dd/mm/aaaa): ");
         DataCaducitat = scan.next();
         scan.nextLine();
+        ProdAlimentacio.add(new Alimentacio(NomProducte,Preu,CodiBarras,DataCaducitat));
 
-
-        if (Contador != 0){
-            try {
-                productos[Contador] = new Alimentacio(NomProducte,Preu,CodiBarras,DataCaducitat);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-            Contador++;
-        } else {
-            try {
-                productos[0] = new Alimentacio(NomProducte,Preu,CodiBarras,DataCaducitat);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-            Contador++;
-        }
     }
 
     public static void Textil(){
         String NomProducte,Composisico,CodiBarras;
-        int Preu;
+        float Preu;
         System.out.println("Afegir tèxtil");
         System.out.print("Nom producte: ");
         NomProducte = scan.nextLine();
         System.out.print("Preu: ");
-        Preu = scan.nextInt();
+        Preu = scan.nextFloat();
         System.out.print("Composició: ");
         Composisico = scan.next();
         System.out.print("Codi de barres: ");
         CodiBarras = scan.next();
         scan.nextLine();
 
-        if (Contador != 0){
-            try {
-                productos[Contador] = new Textil(NomProducte,Preu,CodiBarras,Composisico);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-            Contador++;
-        } else {
-            try {
-                productos[0] = new Textil(NomProducte,Preu,CodiBarras,Composisico);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-            Contador++;
-        }
+        ProdTextil.add(new Textil(NomProducte,Preu,CodiBarras,Composisico));
     }
     public static void Electronica(){
         String NomProducte,CodiBarras;
-        int Preu,Garantia;
+        float Preu;
+        int Garantia;
         System.out.println("Afegir electrònica");
         System.out.print("Nom producte: ");
         NomProducte = scan.nextLine();
         System.out.print("Preu: ");
-        Preu = scan.nextInt();
+        Preu = scan.nextFloat();
         System.out.print("Garantia (dies): ");
         Garantia = scan.nextInt();
         System.out.print("Codi de barres: ");
         CodiBarras = scan.next();
         scan.nextLine();
 
-        if (Contador != 0){
-            try {
-                productos[Contador] = new Electronica(NomProducte,Preu,CodiBarras,Garantia);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-            Contador++;
-        } else {
-            try {
-                productos[0] = new Electronica(NomProducte,Preu,CodiBarras,Garantia);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-            Contador++;
-        }
+        ProdElectronica.add(new Electronica(NomProducte,Preu,CodiBarras,Garantia));
     }
-
 
 }

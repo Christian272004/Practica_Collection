@@ -1,7 +1,7 @@
 public class Electronica extends Producto{
     protected int Garantia;
 
-    public Electronica(String nomProducte, int preu, String codiBarras, int garantia) {
+    public Electronica(String nomProducte, float preu, String codiBarras, int garantia) {
         super(nomProducte, preu, codiBarras);
         Garantia = garantia;
     }
@@ -12,6 +12,12 @@ public class Electronica extends Producto{
 
     public void setGarantia(int garantia) {
         Garantia = garantia;
+    }
+
+    @Override
+    public float getPreu() {
+       float preu = super.getPreu();
+        return  (float) (preu + preu*(Garantia/365)*0.1);
     }
 
     @Override
