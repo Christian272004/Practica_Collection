@@ -36,8 +36,16 @@ class Alimentacio extends Producto {
         }
         return count;
     }
+
+
+    @Override
+    public int compareTo(Producto o) {
+
+        return 0;
+    }
+
     @Override
     public String toString() {
-        return NomProducte;
+        return NomProducte ;
     }
 }

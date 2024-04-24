@@ -1,19 +1,21 @@
 import javax.swing.*;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Carrito {
+    static List<Producto> Cosas = new ArrayList<>(Producto.Productos);
+    static Map<String, Integer> conteo = Cosas.stream().collect(Collectors.groupingBy((str) -> str.toString(), Collectors.summingInt(e -> 1)));
+    static Map<String, Integer> conteo2 = Cosas.stream().collect(Collectors.groupingBy((str) -> str.toString(), Collectors.summingInt(e -> 1)));
+
     public static void MostrarCarritoCompra(){
         System.out.println("Carret");
         System.out.println("-----------------");
-        /*
-        for (Producto n : Producto.productos){
-            if (n != null){
-                System.out.println(n + "-->" );
-            }
+
+        for (String s : conteo.keySet()) {
+            System.out.println(s+" -> "+conteo.get(s));
         }
 
-         */
         System.out.println("-----------------");
         System.out.println();
     }
@@ -21,27 +23,27 @@ public class Carrito {
 
 
     public static void PasarPorCaja(){
-        Set<Producto> elec_uniq = new HashSet<Producto>(Producto.ProdAlimentacio);
+
 
         System.out.println("-----------------------------");
         System.out.println("SAPAMERCAT");
         System.out.println("-----------------------------");
         System.out.println("Data: " + LocalDate.now());
         System.out.println("-----------------------------");
+        conteo.forEach((key,item) -> System.out.print(key + "\t" + conteo.get(key) + "\t"   ));
+        conteo2.forEach((item) -> System.out.println(item.getPreu()));
         /*
-        for (Alimentacio m : Producto){
-            if (m != null){
-                System.out.printf("%s\t%.2f\n",m,m.getPreu());
+        for (String s : conteo.keySet()) {
+            System.out.print(s + "\t" + conteo.get(s) + "\t" );
+            for (Producto a: Alimentacion) {
+                System.out.print(a.getPreu() + " " + a.getPreu()*conteo.get(s)+ "\n" );
             }
         }
 
+
          */
-
-
-        for (Producto a: elec_uniq) {
-            System.out.println(a.getNomProducte() + "\t" + "\t\t" + " " + a.getPreu() + "\t");
-        }
         System.out.println("-----------------------------");
         System.out.println("Total: " );
+        Producto.Productos.clear();
     }
 }

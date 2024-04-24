@@ -1,15 +1,13 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.DoubleStream;
 
-abstract class Producto {
+
+abstract class Producto implements Comparable<Producto> {
     protected String NomProducte;
     protected float Preu;
     protected String CodiBarras;
-    protected static ArrayList<Alimentacio> ProdAlimentacio = new ArrayList<Alimentacio>();
-    protected static ArrayList<Textil> ProdTextil = new ArrayList<Textil>();
-    protected static ArrayList<Electronica> ProdElectronica = new ArrayList<Electronica>();
+    protected static ArrayList<Producto> Productos = new ArrayList<Producto>();
 
     public Producto(String nomProducte, float preu, String codiBarras) {
         NomProducte = nomProducte;
@@ -58,7 +56,7 @@ abstract class Producto {
         System.out.print("Data de caducitat (dd/mm/aaaa): ");
         DataCaducitat = scan.next();
         scan.nextLine();
-        ProdAlimentacio.add(new Alimentacio(NomProducte,Preu,CodiBarras,DataCaducitat));
+        Productos.add(new Alimentacio(NomProducte,Preu,CodiBarras,DataCaducitat));
 
     }
 
@@ -76,7 +74,7 @@ abstract class Producto {
         CodiBarras = scan.next();
         scan.nextLine();
 
-        ProdTextil.add(new Textil(NomProducte,Preu,CodiBarras,Composisico));
+        Productos.add(new Textil(NomProducte,Preu,CodiBarras,Composisico));
     }
     public static void Electronica(){
         String NomProducte,CodiBarras;
@@ -93,7 +91,7 @@ abstract class Producto {
         CodiBarras = scan.next();
         scan.nextLine();
 
-        ProdElectronica.add(new Electronica(NomProducte,Preu,CodiBarras,Garantia));
+        Productos.add(new Electronica(NomProducte,Preu,CodiBarras,Garantia));
     }
 
 }
