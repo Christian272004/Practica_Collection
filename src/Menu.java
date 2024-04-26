@@ -14,9 +14,9 @@ public class Menu {
              System.out.println("------------");
              System.out.println("-- INICI ---");
              System.out.println("------------");
-             System.out.println("1) Introduit producte");
-             System.out.println("2) Passar per caixa");
-             System.out.println("3) Mostrar carret de compra");
+             System.out.println("1) Introduir producte ");
+             System.out.println("2) Passar per caixa 📦");
+             System.out.println("3) Mostrar carret de compra 🛒");
              System.out.println("0) Acabar");
              opcion = scan.nextInt();
              scan.nextLine();

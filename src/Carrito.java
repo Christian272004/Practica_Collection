@@ -5,43 +5,33 @@ import java.util.stream.Collectors;
 
 public class Carrito {
     static List<Producto> Cosas = new ArrayList<>(Producto.Productos);
-    static Map<String, Integer> conteo = Cosas.stream().collect(Collectors.groupingBy((str) -> str.toString(), Collectors.summingInt(e -> 1)));
-    static Map<String, Integer> conteo2 = Cosas.stream().collect(Collectors.groupingBy((str) -> str.toString(), Collectors.summingInt(e -> 1)));
+    static Map<String, Integer> conteo = Cosas.stream()
+            .collect(Collectors.groupingBy((producto) -> producto.getPreu()  + "_" + producto.getCodiBarras() ,Collectors.summingInt(e -> 1)));
+
 
     public static void MostrarCarritoCompra(){
         System.out.println("Carret");
         System.out.println("-----------------");
-
-        for (String s : conteo.keySet()) {
-            System.out.println(s+" -> "+conteo.get(s));
-        }
-
+        conteo.forEach((key, value) -> {
+            String nombreProducto = Producto.obtenerNombreProducto(key.substring(key.indexOf("_")+1));
+            System.out.printf("%s->%d\n", nombreProducto, value);
+        });
         System.out.println("-----------------");
         System.out.println();
     }
 
-
-
     public static void PasarPorCaja(){
-
-
         System.out.println("-----------------------------");
         System.out.println("SAPAMERCAT");
         System.out.println("-----------------------------");
         System.out.println("Data: " + LocalDate.now());
         System.out.println("-----------------------------");
-        conteo.forEach((key,item) -> System.out.print(key + "\t" + conteo.get(key) + "\t"   ));
-        conteo2.forEach((item) -> System.out.println(item.getPreu()));
-        /*
-        for (String s : conteo.keySet()) {
-            System.out.print(s + "\t" + conteo.get(s) + "\t" );
-            for (Producto a: Alimentacion) {
-                System.out.print(a.getPreu() + " " + a.getPreu()*conteo.get(s)+ "\n" );
-            }
-        }
-
-
-         */
+        conteo.forEach((key, value) -> {
+            String nombreProducto = Producto.obtenerNombreProducto(key.substring(key.indexOf("_")+1));
+            Float precioUnidad = Float.valueOf(key.substring(0,key.indexOf("_")));
+            Float precio = precioUnidad * value;
+            System.out.printf("%s%15d\t%.2f\t%.2f\n", nombreProducto, value, precioUnidad, precio);
+        });
         System.out.println("-----------------------------");
         System.out.println("Total: " );
         Producto.Productos.clear();

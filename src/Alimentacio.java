@@ -1,8 +1,8 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -16,12 +16,12 @@ class Alimentacio extends Producto {
 
     @Override
     public float getPreu() {
-        float preu = super.getPreu();
+        float preu = super.Preu;
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate fecha = LocalDate.parse(DataCaducitat, formato);// Fecha
+        LocalDate fecha = LocalDate.parse(DataCaducitat, formato);
         LocalDate DataActual = LocalDate.now();// Fecha actual de la maquina
         long numberOFDays = DAYS.between(fecha, DataActual); // Obtener la diferencia de dias entre la fecha de caducidad y la fecha actual
-        return (float) (preu - preu*( 1 /(numberOFDays+1) + (preu * 0.1)));
+        return  (preu - (float) (preu*( 1 /(numberOFDays+1)) + (preu * 0.1)));
     }
 
     public void setDataCaducitat(String dataCaducitat) {
