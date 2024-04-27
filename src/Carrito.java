@@ -1,15 +1,16 @@
-import javax.swing.*;
+
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Carrito {
-    static List<Producto> Cosas = new ArrayList<>(Producto.Productos);
-    static Map<String, Integer> conteo = Cosas.stream()
-            .collect(Collectors.groupingBy((producto) -> producto.getPreu()  + "_" + producto.getCodiBarras() ,Collectors.summingInt(e -> 1)));
 
+    static Map<String, Integer> conteo = Producto.Productos.stream()
+            .collect(Collectors.groupingBy((producto) -> producto.getPreu() + "_" + producto.getCodiBarras(), Collectors.summingInt(e -> 1)));
 
     public static void MostrarCarritoCompra(){
+        Collections.sort(Producto.Productos);
         System.out.println("Carret");
         System.out.println("-----------------");
         conteo.forEach((key, value) -> {
@@ -20,7 +21,8 @@ public class Carrito {
         System.out.println();
     }
 
-    public static void PasarPorCaja(){
+    public static void PasarPorCaja()  {
+        float precioTotal = 0;
         System.out.println("-----------------------------");
         System.out.println("SAPAMERCAT");
         System.out.println("-----------------------------");
@@ -33,7 +35,16 @@ public class Carrito {
             System.out.printf("%s%15d\t%.2f\t%.2f\n", nombreProducto, value, precioUnidad, precio);
         });
         System.out.println("-----------------------------");
-        System.out.println("Total: " );
-        Producto.Productos.clear();
+        for (String key : conteo.keySet()) {
+            precioTotal += Float.valueOf(key.substring(0,key.indexOf("_"))) * conteo.get(key);
+        }
+        System.out.println("Total: " + precioTotal);
+        try {
+            SAPAMERCAT.MeterDatos();
+        } catch (IOException e){
+            System.out.println("Error al escirbir en el archivo de Logs");
+        }
+
     }
+
 }

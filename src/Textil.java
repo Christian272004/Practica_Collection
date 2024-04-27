@@ -1,3 +1,5 @@
+import org.w3c.dom.Text;
+
 public class Textil extends Producto {
     protected String Composicio;
 
@@ -6,17 +8,13 @@ public class Textil extends Producto {
         Composicio = composicio;
     }
 
-    public String getComposicio() {
-        return Composicio;
-    }
-
-    public void setComposicio(String composicio) {
-        Composicio = composicio;
-    }
-
     @Override
     public int compareTo(Producto o) {
-        return 0;
+        if (o instanceof Textil p) {
+            return this.Composicio.compareTo(p.Composicio);
+        } else {
+            return this.CodiBarras.compareTo(o.CodiBarras);
+        }
     }
 
     @Override

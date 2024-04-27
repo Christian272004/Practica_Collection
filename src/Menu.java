@@ -1,10 +1,10 @@
-import java.net.PasswordAuthentication;
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
+import java.util.InputMismatchException;
 import java.util.Scanner;
-
 public class Menu {
     static Scanner scan = new Scanner(System.in);
-     public static void MenuPrincipal(){
+     public static void MenuPrincipal()  {
          int opcion;
 
          do {
@@ -15,30 +15,31 @@ public class Menu {
              System.out.println("-- INICI ---");
              System.out.println("------------");
              System.out.println("1) Introduir producte ");
-             System.out.println("2) Passar per caixa 📦");
-             System.out.println("3) Mostrar carret de compra 🛒");
+             System.out.println("2) Passar per caixa ");
+             System.out.println("3) Mostrar carret de compra ");
              System.out.println("0) Acabar");
-             opcion = scan.nextInt();
-             scan.nextLine();
+             opcion = ComprobarLaOpcion();
+
              switch (opcion) {
                  case 1:
                      MenuProucte();
                      break;
                  case 2:
                      Carrito.PasarPorCaja();
+                     Carrito.conteo.clear();
                      break;
                  case 3:
                      Carrito.MostrarCarritoCompra();
                      break;
                  case 0:
-                     break;
+                     System.exit(1);
                  default:
                      System.out.println("ATENCIÓ!!! \nHa de ser un valor entre 0 i 3");
              }
          } while (opcion != 0);
     }
     public static void MenuProucte(){
-        int opcion = 0;
+        int opcion;
         do {
             System.out.println("---------------");
             System.out.println("-- PRODUCTE ---");
@@ -47,9 +48,7 @@ public class Menu {
             System.out.println("2) Tèxtil");
             System.out.println("3) Electrònica");
             System.out.println("0) Tornar");
-            opcion = scan.nextInt();
-            scan.nextLine();
-
+            opcion = ComprobarLaOpcion();
             switch (opcion){
                 case 1:
                     Producto.Alimentacio();
@@ -66,5 +65,21 @@ public class Menu {
                     System.out.println("ATENCIÓ!!! \nHa de ser un valor entre 0 i 3");
             }
         } while (opcion != 0);
+    }
+    private static int ComprobarLaOpcion(){
+        int opcion = -1;
+        do {
+            try {
+                System.out.print("->");
+                opcion = scan.nextInt();
+                scan.nextLine();
+            } catch (InputMismatchException e){
+                System.out.println("¡Por favor introduce un valor entre 0 y 3!");
+                SAPAMERCAT.GuardarExepciones(e.toString());
+                opcion = -1;
+                scan.nextLine();
+            }
+        } while (opcion == -1);
+        return opcion;
     }
 }

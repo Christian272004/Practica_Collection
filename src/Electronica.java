@@ -6,14 +6,6 @@ public class Electronica extends Producto{
         Garantia = garantia;
     }
 
-    public int getGarantia() {
-        return Garantia;
-    }
-
-    public void setGarantia(int garantia) {
-        Garantia = garantia;
-    }
-
     @Override
     public float getPreu() {
        float preu = super.getPreu();
@@ -22,7 +14,7 @@ public class Electronica extends Producto{
 
     @Override
     public int compareTo(Producto o) {
-        return 0;
+        return this.CodiBarras.compareTo(o.CodiBarras);
     }
 
     @Override

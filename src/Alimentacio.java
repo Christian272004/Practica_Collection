@@ -1,8 +1,5 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -13,7 +10,6 @@ class Alimentacio extends Producto {
         super(nomProducte, preu, codiBarras);
         this.DataCaducitat = dataCaducitat;
     }
-
     @Override
     public float getPreu() {
         float preu = super.Preu;
@@ -24,28 +20,15 @@ class Alimentacio extends Producto {
         return  (preu - (float) (preu*( 1 /(numberOFDays+1)) + (preu * 0.1)));
     }
 
-    public void setDataCaducitat(String dataCaducitat) {
-        this.DataCaducitat = dataCaducitat;
-    }
-    public int countProducts(List<Producto> products, String barcode, double price) {
-        int count = 0;
-        for (Producto product : products) {
-            if (product.getCodiBarras().equals(barcode) && product.getPreu() == price) {
-                count++;
-            }
-        }
-        return count;
-    }
-
-
     @Override
     public int compareTo(Producto o) {
-
-        return 0;
+        return this.CodiBarras.compareTo(o.CodiBarras);
     }
 
     @Override
     public String toString() {
         return NomProducte ;
     }
+
+
 }
