@@ -4,11 +4,19 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Clase Carrito donde se encuentra la funcion de mostrar el carrito y la funcion de pasar por caja
+ */
 public class Carrito {
-
+    /**
+     *HasMap del arraylist de productos
+     */
     static Map<String, Integer> conteo = Producto.Productos.stream()
             .collect(Collectors.groupingBy((producto) -> producto.getPreu() + "_" + producto.getCodiBarras(), Collectors.summingInt(e -> 1)));
 
+    /**
+     *Funcion de Mostrar el carrrito
+     */
     public static void MostrarCarritoCompra(){
         Collections.sort(Producto.Productos);
         System.out.println("Carret");
@@ -21,6 +29,9 @@ public class Carrito {
         System.out.println();
     }
 
+    /**
+     *Funcion de pasar por caja
+     */
     public static void PasarPorCaja()  {
         float precioTotal = 0;
         System.out.println("-----------------------------");

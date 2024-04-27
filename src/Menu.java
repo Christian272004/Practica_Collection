@@ -2,8 +2,16 @@ import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+/**
+ * Clase menu donde se encuentran los dos menus principales, el menu principal y el menu para esocger que producto introducir
+ */
 public class Menu {
     static Scanner scan = new Scanner(System.in);
+
+    /**
+     * Funcion de menu principal
+     */
      public static void MenuPrincipal()  {
          int opcion;
 
@@ -38,6 +46,10 @@ public class Menu {
              }
          } while (opcion != 0);
     }
+
+    /**
+     * Funcion de menu para introducir un producto en concreto
+     */
     public static void MenuProucte(){
         int opcion;
         do {
@@ -66,6 +78,11 @@ public class Menu {
             }
         } while (opcion != 0);
     }
+
+    /**
+     * Funcion para comprobar si la opcion de los menus es correcta
+     * @return retorna el valor de la opcion introducida
+     */
     private static int ComprobarLaOpcion(){
         int opcion = -1;
         do {

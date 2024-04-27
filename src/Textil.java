@@ -1,5 +1,8 @@
-import org.w3c.dom.Text;
 
+
+/**
+ * Subclase Textil de producto
+ */
 public class Textil extends Producto {
     protected String Composicio;
 
@@ -8,6 +11,11 @@ public class Textil extends Producto {
         Composicio = composicio;
     }
 
+    /**
+     * Funcion de la calse Comparable
+     * @param o Objecto con el que queremos comparar.
+     * @return retorna el codigo de barras
+     */
     @Override
     public int compareTo(Producto o) {
         if (o instanceof Textil p) {
@@ -16,7 +24,10 @@ public class Textil extends Producto {
             return this.CodiBarras.compareTo(o.CodiBarras);
         }
     }
-
+    /**
+     * Funcion tostring
+     * @return retorna el nombre del producto
+     */
     @Override
     public String toString() {
         return NomProducte ;

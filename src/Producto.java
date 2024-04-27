@@ -1,12 +1,21 @@
 import java.util.*;
 
-
+/**
+ *
+ */
 abstract class Producto implements Comparable<Producto> {
+    static Scanner scan = new Scanner(System.in);
     protected String NomProducte;
     protected float Preu;
     protected String CodiBarras;
     public static List<Producto> Productos = new ArrayList<>();
 
+    /**
+     * Construcutor de la clase Producto
+     * @param nomProducte Nombre del producto introducido
+     * @param preu Precio del producto introducido
+     * @param codiBarras Codigo de barras del producto introducido
+     */
     public Producto(String nomProducte, float preu, String codiBarras) {
         this.NomProducte = nomProducte;
         this.Preu = preu;
@@ -17,28 +26,16 @@ abstract class Producto implements Comparable<Producto> {
         return NomProducte;
     }
 
-    public void setNomProducte(String nomProducte) {
-        NomProducte = nomProducte;
-    }
-
     public float getPreu() {
         return Preu;
     }
-
-    public void setPreu(float preu) {
-        this.Preu = preu;
-    }
-
     public String getCodiBarras() {
         return CodiBarras;
     }
 
-    public void setCodiBarras(String codiBarras) {
-        CodiBarras = codiBarras;
-    }
-
-
-    static Scanner scan = new Scanner(System.in);
+    /**
+     * Funcion para introducir un producto de la subclase de Alimentacion
+     */
     public static void Alimentacio(){
         String NomProducte,CodiBarras,DataCaducitat;
         float Preu;
@@ -58,6 +55,9 @@ abstract class Producto implements Comparable<Producto> {
 
     }
 
+    /**
+     * Funcion para introducir un producto de la subclase de Textil
+     */
     public static void Textil(){
         String NomProducte,Composisico,CodiBarras;
         float Preu;
@@ -73,6 +73,10 @@ abstract class Producto implements Comparable<Producto> {
 
         Productos.add(new Textil(NomProducte,Preu,"T"+CodiBarras,Composisico));
     }
+
+    /**
+     * Funcion para introducir un producto de la subclase de Electronica
+     */
     public static void Electronica(){
         String NomProducte,CodiBarras;
         float Preu;
@@ -89,6 +93,12 @@ abstract class Producto implements Comparable<Producto> {
 
         Productos.add(new Electronica(NomProducte,Preu,"E"+CodiBarras,Garantia));
     }
+
+    /**
+     * Funcion para obtener el nombre del producto medianete el codigo de barras.
+     * @param codigoBarras Codigo de barras del producto
+     * @return Retorna el nombre del prodcuto asociado al codigo de barras que le pasamos
+     */
     public static String obtenerNombreProducto(String codigoBarras) {
         return Productos.stream()
                 .filter(producto -> producto.getCodiBarras().equals(codigoBarras))
@@ -97,6 +107,10 @@ abstract class Producto implements Comparable<Producto> {
                 .orElse("Producto no encontrado");
     }
 
+    /**
+     * Funcion para comprobar que el nombre del producto no supoere los 15 caracteres
+     * @return Retorna el nombre del producto
+     */
     private static String ComprobarNombre(){
         String NomProducte;
         do {
@@ -109,6 +123,11 @@ abstract class Producto implements Comparable<Producto> {
         return NomProducte;
     }
 
+    /**
+     * Funcion para validar la fecha de Alimentacion
+     * @param fecha Fecha que queremos validad
+     * @return Retorna false si la fecha no es validad y true si la fecha es valida
+     */
     public static boolean ValidadFecha(String fecha) {
         if (!fecha.matches("^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/((19|20)\\d\\d)$")){
             return false;
@@ -126,6 +145,10 @@ abstract class Producto implements Comparable<Producto> {
         }
     }
 
+    /**
+     * Funcion para Comprobar el precio de los productos
+     * @return Retorna el precio del producto
+     */
     private static float ComprobarPrecio(){
         float Preu;
         do {

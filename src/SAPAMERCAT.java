@@ -5,12 +5,27 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ */
 public class SAPAMERCAT {
+    /**
+     *
+     */
     static List<String> Exepciones = new ArrayList<>();
+
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args)  {
         CreacionFicheros();
         Menu.MenuPrincipal();
     }
+
+    /**
+     *
+     */
     private static void CreacionFicheros()  {
         File CarpetaUpdate = new File(".\\updates");
         File CarpetaLogs = new File(".\\logs");
@@ -30,6 +45,10 @@ public class SAPAMERCAT {
         }
     }
 
+    /**
+     *
+     * @throws FileNotFoundException
+     */
     protected static void MeterDatos() throws FileNotFoundException {
         File ArchivoLogs = new File(".\\logs\\Exceptions.dat");
         PrintStream writer2 = new PrintStream(ArchivoLogs);
@@ -40,6 +59,10 @@ public class SAPAMERCAT {
         writer2.close();
     }
 
+    /**
+     *
+     * @param error
+     */
     protected static void GuardarExepciones(String error){
         Exepciones.add(error);
     }

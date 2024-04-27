@@ -3,6 +3,9 @@ import java.time.format.DateTimeFormatter;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
+/**
+ * Subclase Alimentacion de Productos
+ */
 class Alimentacio extends Producto {
     protected String DataCaducitat;
 
@@ -10,6 +13,11 @@ class Alimentacio extends Producto {
         super(nomProducte, preu, codiBarras);
         this.DataCaducitat = dataCaducitat;
     }
+
+    /**
+     * Funcion para obtener el precio en funcion de la fecha de caducidad
+     * @return retorna el precio calculado en funcion de la formula
+     */
     @Override
     public float getPreu() {
         float preu = super.Preu;
@@ -20,11 +28,20 @@ class Alimentacio extends Producto {
         return  (preu - (float) (preu*( 1 /(numberOFDays+1)) + (preu * 0.1)));
     }
 
+    /**
+     * Funcion de la calse Comparable
+     * @param o Objecto con el que queremos comparar.
+     * @return retorna el codigo de barras
+     */
     @Override
     public int compareTo(Producto o) {
         return this.CodiBarras.compareTo(o.CodiBarras);
     }
 
+    /**
+     * Funcion tostring
+     * @return retorna el nombre del producto
+     */
     @Override
     public String toString() {
         return NomProducte ;
