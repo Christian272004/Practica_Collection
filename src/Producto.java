@@ -33,6 +33,10 @@ abstract class Producto implements Comparable<Producto> {
         return CodiBarras;
     }
 
+    public void setPreu(float preu) {
+        this.Preu = preu;
+    }
+
     /**
      * Funcion para introducir un producto de la subclase de Alimentacion
      */
@@ -63,8 +67,7 @@ abstract class Producto implements Comparable<Producto> {
         float Preu;
         System.out.println("Afegir tèxtil");
         NomProducte = ComprobarNombre();
-        System.out.print("Preu: ");
-        Preu = scan.nextFloat();
+        Preu = ComprobarPrecio();
         System.out.print("Composició: ");
         Composisico = scan.next();
         System.out.print("Codi de barres: ");
@@ -72,6 +75,7 @@ abstract class Producto implements Comparable<Producto> {
         scan.nextLine();
 
         Productos.add(new Textil(NomProducte,Preu,"T"+CodiBarras,Composisico));
+
     }
 
     /**
@@ -83,14 +87,11 @@ abstract class Producto implements Comparable<Producto> {
         int Garantia;
         System.out.println("Afegir electrònica");
         NomProducte = ComprobarNombre();
-        System.out.print("Preu: ");
-        Preu = scan.nextFloat();
-        System.out.print("Garantia (dies): ");
-        Garantia = scan.nextInt();
+        Preu = ComprobarPrecio();
+        Garantia = ComprobarGarantia();
         System.out.print("Codi de barres: ");
         CodiBarras = scan.next();
         scan.nextLine();
-
         Productos.add(new Electronica(NomProducte,Preu,"E"+CodiBarras,Garantia));
     }
 
@@ -162,5 +163,19 @@ abstract class Producto implements Comparable<Producto> {
             }
         } while (Preu == -1);
         return Preu;
+    }
+    private static int ComprobarGarantia(){
+        int garantia;
+        do {
+            try {
+                System.out.print("Garantia (dies): ");
+                garantia = scan.nextInt();
+            } catch (InputMismatchException e){
+                System.out.println("¡Por favor introduce una Garantia correcta!");
+                garantia = -1;
+                scan.nextLine();
+            }
+        } while (garantia == -1);
+        return garantia;
     }
 }

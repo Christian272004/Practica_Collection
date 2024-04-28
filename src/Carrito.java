@@ -1,4 +1,6 @@
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
@@ -33,6 +35,7 @@ public class Carrito {
      *Funcion de pasar por caja
      */
     public static void PasarPorCaja()  {
+       ComprobarPrecioTextil();
         float precioTotal = 0;
         System.out.println("-----------------------------");
         System.out.println("SAPAMERCAT");
@@ -54,8 +57,39 @@ public class Carrito {
             SAPAMERCAT.MeterDatos();
         } catch (IOException e){
             System.out.println("Error al escirbir en el archivo de Logs");
+
         }
+        Producto.Productos.clear();
+        Carrito.conteo.clear();
 
     }
 
+    public static void ComprobarPrecioTextil(){
+        try (BufferedReader br = new BufferedReader(new FileReader(".\\updates\\UpdateTextilPrices.dat"))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] parts = linea.split(";");
+                if (parts.length == 2) {
+                    String CodiBarrasF = parts[0].trim();
+                    float Preuf = Float.parseFloat(parts[1].trim());
+                    for (Producto producto : Producto.Productos) {
+                        if (producto instanceof Textil){
+                            if (producto.getCodiBarras().equals(CodiBarrasF)){
+                                producto.setPreu(Preuf);
+                                conteo = Producto.Productos.stream()
+                                        .collect(Collectors.groupingBy((producto2) -> producto2.getPreu() + "_" + producto2.getCodiBarras(), Collectors.summingInt(e -> 1)));
+                            }
+                        }
+
+
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
+            SAPAMERCAT.GuardarExepciones(e.toString());
+        }
+    }
 }
+
+
