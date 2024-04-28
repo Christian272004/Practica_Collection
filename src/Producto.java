@@ -1,14 +1,14 @@
 import java.util.*;
 
 /**
- *
+ *Clase abstracta de Productos que implementa la interficie comparable
  */
 abstract class Producto implements Comparable<Producto> {
     static Scanner scan = new Scanner(System.in);
     protected String NomProducte;
     protected float Preu;
     protected String CodiBarras;
-    public static List<Producto> Productos = new ArrayList<>();
+    protected static List<Producto> Productos = new ArrayList<>();
 
     /**
      * Construcutor de la clase Producto
@@ -54,7 +54,10 @@ abstract class Producto implements Comparable<Producto> {
             scan.nextLine();
             if (ValidadFecha(DataCaducitat)){
                 Productos.add(new Alimentacio(NomProducte,Preu,"A"+CodiBarras,DataCaducitat));
-            }else System.out.println("Introduce una fecha valida");
+            }else {
+                System.out.println("Introduce una fecha valida");
+                SAPAMERCAT.GuardarExepciones("Introduce una fecha valida");
+            }
         } while (!ValidadFecha(DataCaducitat));
 
     }
@@ -158,6 +161,7 @@ abstract class Producto implements Comparable<Producto> {
                 Preu = scan.nextFloat();
             } catch (InputMismatchException e){
                 System.out.println("¡Por favor introduce un precio correcto!");
+                SAPAMERCAT.GuardarExepciones(e.toString());
                 Preu = -1;
                 scan.nextLine();
             }
@@ -172,6 +176,7 @@ abstract class Producto implements Comparable<Producto> {
                 garantia = scan.nextInt();
             } catch (InputMismatchException e){
                 System.out.println("¡Por favor introduce una Garantia correcta!");
+                SAPAMERCAT.GuardarExepciones(e.toString());
                 garantia = -1;
                 scan.nextLine();
             }

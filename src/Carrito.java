@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,13 +12,13 @@ public class Carrito {
     /**
      *HasMap del arraylist de productos
      */
-    static Map<String, Integer> conteo = Producto.Productos.stream()
-            .collect(Collectors.groupingBy((producto) -> producto.getPreu() + "_" + producto.getCodiBarras(), Collectors.summingInt(e -> 1)));
+    static Map<String, Integer> conteo = new HashMap<>();
 
     /**
      *Funcion de Mostrar el carrrito
      */
     public static void MostrarCarritoCompra(){
+        IniciarMap();
         Collections.sort(Producto.Productos);
         System.out.println("Carret");
         System.out.println("-----------------");
@@ -35,6 +34,7 @@ public class Carrito {
      *Funcion de pasar por caja
      */
     public static void PasarPorCaja()  {
+        IniciarMap();
        ComprobarPrecioTextil();
         float precioTotal = 0;
         System.out.println("-----------------------------");
@@ -63,6 +63,10 @@ public class Carrito {
         Carrito.conteo.clear();
 
     }
+    private static void IniciarMap(){
+        conteo = Producto.Productos.stream()
+                .collect(Collectors.groupingBy((producto) -> producto.getPreu() + "_" + producto.getCodiBarras(), Collectors.summingInt(e -> 1)));
+    }
 
     public static void ComprobarPrecioTextil(){
         try (BufferedReader br = new BufferedReader(new FileReader(".\\updates\\UpdateTextilPrices.dat"))) {
@@ -76,8 +80,7 @@ public class Carrito {
                         if (producto instanceof Textil){
                             if (producto.getCodiBarras().equals(CodiBarrasF)){
                                 producto.setPreu(Preuf);
-                                conteo = Producto.Productos.stream()
-                                        .collect(Collectors.groupingBy((producto2) -> producto2.getPreu() + "_" + producto2.getCodiBarras(), Collectors.summingInt(e -> 1)));
+                                IniciarMap();
                             }
                         }
 

@@ -6,16 +6,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ *Clase principal que contiene el main y la funcion de crear los archivos si es que no existen
  */
 public class SAPAMERCAT {
     /**
-     *
+     *Arraylist para guardar las expeciones
      */
     static List<String> Exepciones = new ArrayList<>();
 
     /**
-     *
+     *funcnion principal
      * @param args
      */
     public static void main(String[] args)  {
@@ -24,7 +24,7 @@ public class SAPAMERCAT {
     }
 
     /**
-     *
+     *Funcion para crear los ficheros updates y logs
      */
     private static void CreacionFicheros()  {
         File CarpetaUpdate = new File(".\\updates");
@@ -46,7 +46,7 @@ public class SAPAMERCAT {
     }
 
     /**
-     *
+     *Funcion para meter los datos de las exepciones en el fichero logs
      * @throws FileNotFoundException
      */
     protected static void MeterDatos() throws FileNotFoundException {
@@ -60,8 +60,8 @@ public class SAPAMERCAT {
     }
 
     /**
-     *
-     * @param error
+     *Funcion para guardar las expeciones en una arerayList
+     * @param error Paramentro de entrada del error de la expecion
      */
     protected static void GuardarExepciones(String error){
         Exepciones.add(error);
